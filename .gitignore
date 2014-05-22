@@ -1,0 +1,11 @@
+/uploads/*
+tags
+*.swp
+*.swo
+*.pyc
+ambiente.py
+.coverage
+django.mo
+/log/*.log
+/static/*
+db.sqlite3
