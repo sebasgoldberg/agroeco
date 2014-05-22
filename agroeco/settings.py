@@ -7,6 +7,8 @@ https://docs.djangoproject.com/en/1.6/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/1.6/ref/settings/
 """
+from ambiente import ambiente
+AMBIENTE=ambiente
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
@@ -44,6 +46,7 @@ INSTALLED_APPS = [
     'django.contrib.flatpages',
     'south',
     'compressor',
+    'iampacks.cross.install',
     ] + get_core_apps()
 
 MIDDLEWARE_CLASSES = (
@@ -65,14 +68,18 @@ WSGI_APPLICATION = 'agroeco.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/1.6/ref/settings/#databases
-
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-        'ATOMIC_REQUESTS': True,
+        'ENGINE': 'django.db.backends.mysql', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
+        'NAME': ambiente.db.name,                      # Or path to database file if using sqlite3.
+        'USER': ambiente.db.user,                      # Not used with sqlite3.
+        'PASSWORD': ambiente.db.password,                  # Not used with sqlite3.
+        'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
+        'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
+        'TEST_CHARSET': 'utf8',
     }
 }
+
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.6/topics/i18n/
