@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'south',
     'compressor',
     'iampacks.cross.install',
+    'shipping',
     ] + get_core_apps()
 
 MIDDLEWARE_CLASSES = (
@@ -151,12 +152,14 @@ STATIC_ROOT = location('public/static')
 COMPRESS_ROOT = STATIC_ROOT
 
 OSCAR_INITIAL_ORDER_STATUS = 'Pending'
-OSCAR_INITIAL_LINE_STATUS = 'Pending'
+OSCAR_INITIAL_LINE_STATUS = OSCAR_INITIAL_ORDER_STATUS
 OSCAR_ORDER_STATUS_PIPELINE = {
-  'Pending': ('Being processed', 'Cancelled',),
+  'Pending': ('Being processed', 'Cancelled', ),
   'Being processed': ('Processed', 'Cancelled',),
+  'Processed': (),
   'Cancelled': (),
 }
+OSCAR_LINE_STATUS_PIPELINE = OSCAR_ORDER_STATUS_PIPELINE
 
 MEDIA_URL = '/media/'
 #MEDIA_ROOT = '%s/media' % BASE_DIR
@@ -164,3 +167,4 @@ MEDIA_ROOT = location("public/media")
 
 OSCAR_SHOP_NAME = 'Productor Agroecológico'
 OSCAR_DEFAULT_CURRENCY = 'ARS'
+OSCAR_FROM_EMAIL = ambiente.email.user
