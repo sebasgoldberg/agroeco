@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/1.6/ref/settings/
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
+location = lambda x: os.path.join(
+  os.path.dirname(os.path.dirname(__file__)), x)
 
 
 # Quick-start development settings - unsuitable for production
@@ -76,6 +78,14 @@ DATABASES = {
 # https://docs.djangoproject.com/en/1.6/topics/i18n/
 
 LANGUAGE_CODE = 'es-AR'
+#LANGUAGE_CODE = 'en-US'
+
+gettext = lambda s: s
+
+LANGUAGES = (
+  ('en-US', gettext('English')),
+  ('es-AR', gettext('Spanish')),
+)
 
 TIME_ZONE = 'UTC'
 
@@ -117,8 +127,8 @@ AUTHENTICATION_BACKENDS = (
 from oscar import OSCAR_MAIN_TEMPLATE_DIR
 
 TEMPLATE_DIRS = (
-  #location('templates'),
   OSCAR_MAIN_TEMPLATE_DIR,
+  location('templates'),
   )
 
 from oscar.defaults import *
@@ -129,5 +139,17 @@ HAYSTACK_CONNECTIONS = {
   },
 }
 
-STATIC_ROOT = '%s/static' % BASE_DIR
+STATIC_ROOT = location('public/static')
 COMPRESS_ROOT = STATIC_ROOT
+
+OSCAR_INITIAL_ORDER_STATUS = 'Pending'
+OSCAR_INITIAL_LINE_STATUS = 'Pending'
+OSCAR_ORDER_STATUS_PIPELINE = {
+  'Pending': ('Being processed', 'Cancelled',),
+  'Being processed': ('Processed', 'Cancelled',),
+  'Cancelled': (),
+}
+
+MEDIA_URL = '/media/'
+#MEDIA_ROOT = '%s/media' % BASE_DIR
+MEDIA_ROOT = location("public/media")
