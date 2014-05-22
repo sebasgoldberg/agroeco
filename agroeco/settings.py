@@ -1,3 +1,4 @@
+# coding=utf-8
 """
 Django settings for agroeco project.
 
@@ -90,7 +91,7 @@ LANGUAGE_CODE = 'es-AR'
 gettext = lambda s: s
 
 LANGUAGES = (
-  ('en-US', gettext('English')),
+  #('en-US', gettext('English')),
   ('es-AR', gettext('Spanish')),
 )
 
@@ -160,3 +161,6 @@ OSCAR_ORDER_STATUS_PIPELINE = {
 MEDIA_URL = '/media/'
 #MEDIA_ROOT = '%s/media' % BASE_DIR
 MEDIA_ROOT = location("public/media")
+
+OSCAR_SHOP_NAME = 'Productor Agroecológico'
+OSCAR_DEFAULT_CURRENCY = 'ARS'
