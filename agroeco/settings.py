@@ -48,7 +48,10 @@ INSTALLED_APPS = [
     'south',
     'compressor',
     'iampacks.cross.install',
-    ] + get_core_apps(['shipping'])
+    ] + get_core_apps([
+      'shipping',
+      'basket',
+      ])
 
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -165,7 +168,7 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = location("public/media")
 
 OSCAR_SHOP_NAME = 'Productor Agroecológico'
-OSCAR_DEFAULT_CURRENCY = 'ARS'
+OSCAR_DEFAULT_CURRENCY = '$'
 OSCAR_FROM_EMAIL = ambiente.email.user
 OSCAR_ALLOW_ANON_CHECKOUT = False
 OSCAR_ALLOW_ANON_REVIEWS = False
