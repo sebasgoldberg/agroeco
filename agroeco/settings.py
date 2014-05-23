@@ -48,8 +48,7 @@ INSTALLED_APPS = [
     'south',
     'compressor',
     'iampacks.cross.install',
-    'shipping',
-    ] + get_core_apps()
+    ] + get_core_apps(['shipping'])
 
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -59,7 +58,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'oscar.apps.basket.middleware.BasketMiddleware',
-    'django.middleware.transaction.TransactionMiddleware',  # Django 1.5 only
+    #'django.middleware.transaction.TransactionMiddleware',  # Django 1.5 only
     'django.contrib.flatpages.middleware.FlatpageFallbackMiddleware',
 )
 
@@ -168,3 +167,6 @@ MEDIA_ROOT = location("public/media")
 OSCAR_SHOP_NAME = 'Productor Agroecológico'
 OSCAR_DEFAULT_CURRENCY = 'ARS'
 OSCAR_FROM_EMAIL = ambiente.email.user
+OSCAR_ALLOW_ANON_CHECKOUT = False
+OSCAR_ALLOW_ANON_REVIEWS = False
+OSCAR_MODERATE_REVIEWS = True

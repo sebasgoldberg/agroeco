@@ -2,7 +2,7 @@ from decimal import Decimal as D
 from oscar.apps.shipping import repository, methods as core_methods
 
 class Repository(repository.Repository):
-  methods = [core_methods.FixedPrice(D('40.00'))]
+  methods = [core_methods.FixedPrice(D('40.00'), D('40.00'))]
 
   def get_shipping_methods(self, user, basket, shipping_addr=None, **kwargs):
     return self.prime_methods(basket, self.methods)
