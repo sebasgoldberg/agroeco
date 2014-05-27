@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     ] + get_core_apps([
       'shipping',
       'basket',
+      'checkout',
       ])
 
 MIDDLEWARE_CLASSES = (
@@ -135,11 +136,18 @@ AUTHENTICATION_BACKENDS = (
   'django.contrib.auth.backends.ModelBackend',
   )
 
-from oscar import OSCAR_MAIN_TEMPLATE_DIR
+TEMPLATE_LOADERS = (
+  'django.template.loaders.filesystem.Loader',
+  'django.template.loaders.app_directories.Loader',
+  # needed by django-treebeard for admin (and potentially other libs)
+  #'django.template.loaders.eggs.Loader',
+  )
 
+from oscar import OSCAR_MAIN_TEMPLATE_DIR
+location = lambda x: os.path.join(os.path.dirname(os.path.realpath(__file__)), '..', x)
 TEMPLATE_DIRS = (
-  OSCAR_MAIN_TEMPLATE_DIR,
   location('templates'),
+  OSCAR_MAIN_TEMPLATE_DIR,
   )
 
 from oscar.defaults import *
@@ -149,6 +157,10 @@ HAYSTACK_CONNECTIONS = {
   'ENGINE': 'haystack.backends.simple_backend.SimpleEngine',
   },
 }
+
+STATICFILES_DIRS = (
+  location('static'),
+  )
 
 STATIC_ROOT = location('public/static')
 COMPRESS_ROOT = STATIC_ROOT
