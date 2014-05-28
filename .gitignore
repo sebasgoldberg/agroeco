@@ -7,6 +7,5 @@ ambiente.py
 .coverage
 django.mo
 /log/*.log
-/static/*
 db.sqlite3
 /public/*
